@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "id": "tm5_three_symbols",
+  "name": "Tm5 Three Symbols",
+  "description": "Five working states, three symbols. Writes and reads symbol 2; halts after 5 steps with 3 nonblank cells.",
+  "semantics": "multi-symbol-two-way-write-move-halt-v1",
+  "states": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "symbols": [
+    0,
+    1,
+    2
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 2,
+        "move": "R",
+        "next": "B"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    },
+    "B": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "C"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    },
+    "C": {
+      "0": {
+        "write": 0,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "D"
+      }
+    },
+    "D": {
+      "0": {
+        "write": 0,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "E"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    },
+    "E": {
+      "0": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    }
+  }
+}

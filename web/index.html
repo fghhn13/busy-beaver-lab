@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Busy Beaver Lab</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header><div class="brand"><span class="brand-mark">B</span><div><strong>Busy Beaver Lab</strong><small>BUSY BEAVER / LOCAL RESEARCH LAB</small></div></div><span id="connection" class="connection">Connecting</span></header>
+  <main>
+    <aside class="panel setup">
+      <div class="eyebrow">01 / EXPERIMENT SETUP</div><h2>Choose a machine</h2>
+      <label>Machine configuration<select id="machine"></select></label>
+      <p id="description" class="muted"></p>
+      <div id="transition-table"></div>
+      <details id="configuration-editor"><summary>Edit / import configuration</summary><p class="muted">Use a new ID to save a separate machine file. Existing configurations are preserved.</p><div class="two"><label>New states<input id="new-states" type="number" min="1" max="32" value="5"></label><label>Symbols (include 0)<input id="new-symbols" type="text" value="0,1,2"></label></div><button id="new-template" class="secondary">Create multi-symbol template</button><textarea id="machine-json" spellcheck="false" aria-label="Machine JSON"></textarea><button id="save-machine" class="secondary">Save new machine</button></details>
+      <div class="divider"></div>
+      <label>Step budget<input id="max-steps" type="number" min="1" max="100000000" value="10000"></label>
+      <div class="two"><label>Time budget / seconds<input id="max-seconds" type="number" min="1" max="3600" value="30"></label><label>Nonblank cell budget<input id="max-cells" type="number" min="1" max="100000" value="10000"></label></div>
+      <label class="check"><input id="cycles" type="checkbox" checked> Detect exact configuration cycles</label>
+      <label class="check"><input id="start-paused" type="checkbox" checked> Start paused for single-step observation</label>
+      <button id="start" class="primary">Create experiment</button>
+      <button id="batch" class="secondary">Run four binary benchmarks</button>
+      <p class="muted footnote">Each run is saved separately. Budget exhaustion remains undecided.</p>
+    </aside>
+    <section class="workspace">
+      <div class="workspace-title"><div><div class="eyebrow">02 / OBSERVATION</div><h1 id="run-title">Start with a simple machine</h1><p id="run-subtitle" class="muted">Create an experiment to explore the tape, head and state transitions.</p></div><span id="status" class="badge">No run selected</span></div>
+      <div class="stats"><div><small>Steps</small><strong id="stat-steps">—</strong></div><div><small>State</small><strong id="stat-state">—</strong></div><div><small>Head position</small><strong id="stat-head">—</strong></div><div><small>Nonblank cells</small><strong id="stat-ones">—</strong></div></div>
+      <p id="symbol-counts" class="muted">Nonblank symbol counts will appear here.</p>
+      <section class="panel tape-panel"><div class="section-title"><h2>Tape motion</h2><label class="check"><input id="follow-head" type="checkbox" checked> Follow head</label></div><canvas id="tape" height="160" aria-label="Tape symbols, coordinates and head"></canvas><p id="rule" class="rule">Waiting for the first transition</p>
+        <div class="toolbar"><button data-action="step">Single step</button><button data-action="resume">Run / resume</button><button data-action="pause">Pause</button><button data-action="cancel" class="danger">Stop</button><span class="spacer"></span><button id="pan-left" title="Pan tape left">←</button><button id="pan-right" title="Pan tape right">→</button><label class="compact">Cell width<select id="cell-size"><option value="28">28</option><option value="44" selected>44</option><option value="64">64</option></select></label></div>
+      </section>
+      <section class="panel"><div class="section-title"><h2>Exact replay</h2><label class="check"><input id="follow-live" type="checkbox" checked> Follow live</label></div>
+        <div class="timeline"><button id="replay-play">Play replay</button><input id="timeline" type="range" min="0" max="0" value="0" aria-label="Replay timeline"><label class="compact">Speed<select id="replay-speed"><option value="500">2 steps / second</option><option value="100" selected>10 steps / second</option><option value="33">30 steps / second</option></select></label></div>
+        <div class="toolbar"><label class="compact">Step<input id="seek-step" type="text" inputmode="numeric" value="0"></label><button id="seek">Go</button><button id="previous">Previous</button><button id="next">Next</button><span id="replay-label" class="muted">Replay not started</span></div>
+      </section>
+      <section class="panel"><div class="section-title"><h2>Tape spacetime</h2><div id="symbol-legend" class="legend"></div></div><canvas id="spacetime" height="310" aria-label="Tape spacetime at actual execution steps"></canvas><p id="trace-label" class="muted footnote">X: absolute tape position · Y: execution step · Click to replay</p><button id="export-chart" class="secondary">Export spacetime PNG</button></section>
+      <section class="panel evidence-panel"><div class="section-title"><h2>Conclusion & evidence</h2><button id="verify">Verify evidence</button></div><p id="conclusion">No experiment started.</p><p id="verification" class="muted"></p><a id="download" hidden>Download result JSON</a><p id="result-path" class="file-path"></p></section>
+    </section>
+    <aside class="panel history"><div class="eyebrow">03 / ARCHIVE</div><div class="section-title"><h2>Independent runs</h2><button id="refresh" title="Refresh runs">↻</button></div><label>Filter by conclusion<select id="filter"><option value="">All experiments</option><option value="HALTED">Halted</option><option value="NON_HALTING">Proven non-halting</option><option value="UNKNOWN">Undecided</option></select></label><div id="runs" class="run-list"></div><p class="muted footnote">Paused or interrupted runs can resume. Completed runs support replay and downloads.</p></aside>
+  </main>
+  <div id="notice" role="status" hidden></div><script src="/static/app.js" defer></script>
+</body>
+</html>

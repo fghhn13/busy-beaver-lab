@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "right_drifter",
+  "name": "Right drift · budget benchmark",
+  "description": "Moves right indefinitely without changing the tape. The basic cycle detector leaves this undecided at the budget limit.",
+  "semantics": "binary-two-way-write-move-halt-v1",
+  "states": [
+    "A"
+  ],
+  "symbols": [
+    0,
+    1
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "nonzero_cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 0,
+        "move": "R",
+        "next": "A"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "A"
+      }
+    }
+  }
+}

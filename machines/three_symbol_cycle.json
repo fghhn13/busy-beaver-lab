@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "id": "three_symbol_cycle",
+  "name": "Three Symbol Cycle",
+  "description": "Three-symbol exact cycle: writes 2 and 1, erases both, and returns to the initial configuration after 4 steps.",
+  "semantics": "multi-symbol-two-way-write-move-halt-v1",
+  "states": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "symbols": [
+    0,
+    1,
+    2
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 2,
+        "move": "R",
+        "next": "B"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    },
+    "B": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "C"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    },
+    "C": {
+      "0": {
+        "write": 0,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "2": {
+        "write": 0,
+        "move": "R",
+        "next": "D"
+      }
+    },
+    "D": {
+      "0": {
+        "write": 0,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 0,
+        "move": "L",
+        "next": "A"
+      },
+      "2": {
+        "write": 2,
+        "move": "R",
+        "next": "H"
+      }
+    }
+  }
+}

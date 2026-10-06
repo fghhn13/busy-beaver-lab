@@ -1,0 +1,15 @@
+/.conda/
+/data/
+/results/*
+!/results/.gitkeep
+__pycache__/
+*.py[cod]
+.pytest_cache/
+/web/node_modules/
+/web/dist/
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+*.log

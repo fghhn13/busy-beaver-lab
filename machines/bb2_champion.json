@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "bb2_champion",
+  "name": "2-state champion · 6 steps / 4 ones",
+  "description": "Binary replay benchmark: A0=1RB, A1=1LB, B0=1LA, B1=1RH. The halting transition counts as a step.",
+  "semantics": "binary-two-way-write-move-halt-v1",
+  "states": [
+    "A",
+    "B"
+  ],
+  "symbols": [
+    0,
+    1
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "nonzero_cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "B"
+      },
+      "1": {
+        "write": 1,
+        "move": "L",
+        "next": "B"
+      }
+    },
+    "B": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "A"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      }
+    }
+  }
+}

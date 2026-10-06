@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "halt_immediately",
+  "name": "Immediate halt",
+  "description": "Writes 1, moves right and halts from a blank tape.",
+  "semantics": "binary-two-way-write-move-halt-v1",
+  "states": [
+    "A"
+  ],
+  "symbols": [
+    0,
+    1
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "nonzero_cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      }
+    }
+  }
+}

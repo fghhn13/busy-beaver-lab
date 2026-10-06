@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "tm5_demo",
+  "name": "5-state demonstration",
+  "description": "Binary five-state machine for tape motion and replay experiments.",
+  "semantics": "binary-two-way-write-move-halt-v1",
+  "states": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "symbols": [
+    0,
+    1
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "nonzero_cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "B"
+      },
+      "1": {
+        "write": 1,
+        "move": "L",
+        "next": "C"
+      }
+    },
+    "B": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "C"
+      },
+      "1": {
+        "write": 0,
+        "move": "L",
+        "next": "D"
+      }
+    },
+    "C": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "D"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "E"
+      }
+    },
+    "D": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "A"
+      },
+      "1": {
+        "write": 0,
+        "move": "R",
+        "next": "E"
+      }
+    },
+    "E": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "H"
+      },
+      "1": {
+        "write": 1,
+        "move": "L",
+        "next": "B"
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "tm5_random_01",
+  "name": "5-state random test machine",
+  "description": "Five-state binary test machine. Halting is not guaranteed; use a step budget.",
+  "semantics": "binary-two-way-write-move-halt-v1",
+  "states": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "symbols": [
+    0,
+    1
+  ],
+  "blank_symbol": 0,
+  "halt_state": "H",
+  "initial": {
+    "state": "A",
+    "head": 0,
+    "nonzero_cells": []
+  },
+  "transitions": {
+    "A": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "B"
+      },
+      "1": {
+        "write": 0,
+        "move": "L",
+        "next": "C"
+      }
+    },
+    "B": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "C"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "D"
+      }
+    },
+    "C": {
+      "0": {
+        "write": 1,
+        "move": "R",
+        "next": "D"
+      },
+      "1": {
+        "write": 0,
+        "move": "L",
+        "next": "E"
+      }
+    },
+    "D": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "A"
+      },
+      "1": {
+        "write": 1,
+        "move": "R",
+        "next": "E"
+      }
+    },
+    "E": {
+      "0": {
+        "write": 1,
+        "move": "L",
+        "next": "B"
+      },
+      "1": {
+        "write": 0,
+        "move": "R",
+        "next": "H"
+      }
+    }
+  }
+}
